@@ -1,0 +1,24 @@
+acl url1 dstdomain -i 127.0.0.1
+acl url2 dstdomain -i localhost
+acl url3 dstdomain -i 191.233.239.233
+acl url4 dstdomain -i azurefree.servehttp.com
+acl url5 dstdomain -i brvip.servehttp.com
+acl payload url_regex -i /etc/squid3/payload.txt
+acl all src 0.0.0.0/0
+
+http_access allow url1
+http_access allow url2
+http_access allow url3
+http_access allow url4
+http_access allow url5
+http_access allow payload
+http_access deny all
+
+#Portas
+http_port 80
+
+#Nome squid
+visible_hostname TIPSBRASIL
+via off
+forwarded_for off
+pipeline_prefetch off
